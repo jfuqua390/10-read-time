@@ -20,3 +20,24 @@ test(`Show read time for articles to user`, (assert) => {
   assert.equal(secondReadTime.innerText.trim(), `8 mins`,
     `The read time for the article should be shown based on a WPM of 200 words per min`);
 });
+
+test(`Show navigation to the user`, (assert) => {
+  const nav = document.querySelector(`nav`);
+  const navItems = document.querySelectorAll(`nav a`);
+
+  assert.notStrictEqual(nav, null,
+    `There should be a "nav" element`);
+
+  assert.equal(navItems.length, document.querySelectorAll(`.entry`).length,
+    `There should be nav links for each article`);
+  assert.equal(navItems[0].getAttribute(`href`), `#lua-cooper`,
+    `The 'href' for each navItem should be set using 'setAttribute'
+     to the id of the article it links to`);
+  assert.equal(navItems[1].getAttribute(`href`), `#rocket-code`,
+    `The 'href' for each navItem should be set using 'setAttribute'
+     to the id of the article it links to`);
+  assert.equal(navItems[0].innerText, `Meet Lua Cooper: London Campus Director`,
+    `The text of the nav link should match the title of the article`);
+  assert.equal(navItems[1].innerText, `From Rocket Science to Rocking Code: Leslie’s story`,
+    `The text of the nav link should match the title of the article`);
+});
